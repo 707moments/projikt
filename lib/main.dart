@@ -1,9 +1,3 @@
-// TODO: NAVIGATION ROUTING, di ko maayos 
-// restruct page
-// FIRST PAGE SHOULD BE LOGIN REGISTER THEN EDIT PROFILE THEN MENU.
-// dart file per screen
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/secondscreen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -28,16 +22,23 @@ class _YOUAIState extends State<YOUAI> {
       brightness: isDark ? Brightness.dark : Brightness.light,
     );
 
-    Color bottomNavBarColor = isDark ? Colors.black : Colors.grey[100]!;
-    Color iconColor = isDark ? Colors.white : Colors.black;
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: themeData,
-      home: Padding(
-        padding: const EdgeInsets.all(0.0),
-        child: Scaffold(
-          body: SingleChildScrollView(
+      initialRoute: '/',
+      routes: {
+        '/': (context) => SecondScreen(), //test
+        '/chat': (context) => HomeScreen(),   // test
+        //'/pay': (context) => PayScreen(),    
+        //'/profile': (context) => ProfileScreen(), 
+      },
+    );
+  }
+  Widget HomeScreen(){
+    Color bottomNavBarColor = Colors.grey[100]!;
+    Color iconColor = Colors.black;
+    return Scaffold(
+      body: SingleChildScrollView(
             child: Column(
               children: [
                 Padding(
@@ -434,20 +435,6 @@ class _YOUAIState extends State<YOUAI> {
                     ],
                   ),
                 ),
-                TutorCard(
-                  subject: 'Mathematics',
-                  daysOfWeek: 'Monday, Wednesday',
-                  location: 'The Hood',
-                  onMessagePressed: () {},
-                  onCallPressed: () {},
-                ),
-                TutorCard(
-                  subject: 'Buggy',
-                  daysOfWeek: 'Monday, Wednesday',
-                  location: 'The Hood',
-                  onMessagePressed: () {},
-                  onCallPressed: () {},
-                ),
                 Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(4),
@@ -532,80 +519,43 @@ class _YOUAIState extends State<YOUAI> {
             ),
           ),
           bottomNavigationBar: GNav(
-            rippleColor: Colors.grey[300]!,
-            hoverColor: Colors.grey[100]!,
-            tabActiveBorder: Border.all(color: Color(0xff4cc55c), width: 1),
-            gap: 8,
-            activeColor: iconColor,
-            iconSize: 24,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            duration: Duration(milliseconds: 400),
-            tabBackgroundColor: bottomNavBarColor,
-            tabs: [
-              GButton(
-                icon: LineIcons.home,
-                text: 'Home',
-              ),
-              GButton(
-                icon: LineIcons.commentAlt,
-                text: 'Chat',
-              ),
-              GButton(
-                icon: LineIcons.receipt,
-                text: 'Pay',
-              ),
-              GButton(
-                icon: LineIcons.user,
-                text: 'Profile',
-              ),
-            ],
+          rippleColor: Colors.grey[300]!,
+          hoverColor: Colors.grey[100]!,
+          tabActiveBorder: Border.all(color: Color(0xff4cc55c), width: 1),
+          gap: 8,
+          activeColor: iconColor,
+          iconSize: 24,
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          duration: Duration(milliseconds: 400),
+          tabBackgroundColor: bottomNavBarColor,
+          tabs: [
+          GButton(
+            icon: LineIcons.home,
+            text: 'Home',
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class TutorCard extends StatelessWidget {
-  final String subject;
-  final String daysOfWeek;
-  final String location;
-  final VoidCallback? onMessagePressed;
-  final VoidCallback? onCallPressed;
-
-  TutorCard({
-    required this.subject,
-    required this.daysOfWeek,
-    required this.location,
-    this.onMessagePressed,
-    this.onCallPressed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          ListTile(
-            title: Text('Looking for a Tutor'),
-            subtitle: Text(
-                'Subject: $subject\nDays: $daysOfWeek\nLocation: $location'),
+          GButton(
+            icon: LineIcons.commentAlt,
+            text: 'Chat',
+            //onPressed: () {
+              //Navigator.pushNamed(context, '/chat'); 
+            //},
           ),
-          ButtonBar(
-            children: [
-              ElevatedButton(
-                onPressed: onMessagePressed,
-                child: Text('Message'),
-              ),
-              ElevatedButton(
-                onPressed: onCallPressed,
-                child: Text('Call'),
-              ),
-            ],
+          GButton(
+            icon: LineIcons.receipt,
+            text: 'Pay',
+            //onPressed: () {
+              //Navigator.pushNamed(context, '/pay'); 
+            //},
+          ),
+          GButton(
+            icon: LineIcons.user,
+            text: 'Profile',
+            //onPressed: () {
+              //Navigator.pushNamed(context, '/profile'); 
+            //},
           ),
         ],
       ),
     );
-  }
+  }  
 }
