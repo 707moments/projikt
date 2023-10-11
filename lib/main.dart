@@ -1,3 +1,9 @@
+// TODO: NAVIGATION ROUTING, di ko maayos lmfao.
+// UNSURE - POSSIBLE RESTRUCTURING OF THIS PAGE IF NEEDED FOR ROUTING
+// FIRST PAGE SHOULD BE LOGIN REGISTER THEN EDIT PROFILE THEN MENU.
+// dart file per screen
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/secondscreen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -603,5 +609,3 @@ class TutorCard extends StatelessWidget {
     );
   }
 }
-
-//class Favorites extends StatefulWidget {}
