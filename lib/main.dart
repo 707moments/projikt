@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/secondscreen.dart';
+import 'package:flutter_application_1/loginscreen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -27,7 +27,7 @@ class _YOUAIState extends State<YOUAI> {
       theme: themeData,
       initialRoute: '/',
       routes: {
-        '/': (context) => SecondScreen(), //test
+        '/': (context) => LoginScreen(), //test
         '/chat': (context) => HomeScreen(),   // test
         //'/pay': (context) => PayScreen(),    
         //'/profile': (context) => ProfileScreen(), 
