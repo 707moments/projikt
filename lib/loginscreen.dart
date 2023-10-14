@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
+import 'package:animations/animations.dart';
 //import 'package:any_animated_button/any_animated_button.dart';
 //test ulit
 
@@ -44,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
-                    ),
+                    ).animate().fadeIn(),
                     SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -208,7 +210,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           scrollbarTheme: ScrollbarThemeData(
                             radius: const Radius.circular(40),
                             thickness: MaterialStateProperty.all<double>(6),
-                            thumbVisibility: MaterialStateProperty.all<bool>(true),
+                            thumbVisibility:
+                                MaterialStateProperty.all<bool>(true),
                           ),
                         ),
                         menuItemStyleData: const MenuItemStyleData(
@@ -230,7 +233,22 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: 50,
                       borderWidth: 2,
                       onPress: () {
-                        //mainscreen
+                        Navigator.pushNamed(context, '/home');
+                      },
+                    ),
+                    AnimatedButton(
+                      height: 40,
+                      width: 200,
+                      text: 'REGISTER',
+                      isReverse: true,
+                      selectedTextColor: Colors.black,
+                      transitionType: TransitionType.LEFT_TO_RIGHT,
+                      backgroundColor: Color.fromRGBO(16, 48, 89, 1),
+                      borderColor: Colors.white,
+                      borderRadius: 50,
+                      borderWidth: 2,
+                      onPress: () {
+                        //Navigator.pushNamed(context, '/register');
                       },
                     ),
                     //one more button kay register?
@@ -238,7 +256,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-          ),
+          ).animate().fadeIn().scale().move(delay: 500.ms, duration: 600.ms),
         ),
       ),
     );

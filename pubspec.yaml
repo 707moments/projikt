@@ -18,6 +18,8 @@ dependencies:
   line_icons: ^2.0.3 
   dropdown_button2: ^2.3.8
   flutter_animated_button: ^2.0.3
+  animations: ^2.0.8
+  flutter_animate: ^4.2.0+1
 
 dev_dependencies:
   flutter_test:
