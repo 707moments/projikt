@@ -251,7 +251,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         //Navigator.pushNamed(context, '/register');
                       },
                     ),
-                    //one more button kay register?
                   ],
                 ),
               ),
