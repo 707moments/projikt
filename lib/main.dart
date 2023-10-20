@@ -147,6 +147,7 @@ class _YOUAIState extends State<YOUAI> {
           GButton(
             icon: LineIcons.home,
             text: 'Home',
+            iconColor: Color.fromRGBO(16, 48, 89, 1),
           ),
           GButton(
             icon: LineIcons.commentAlt,
@@ -154,6 +155,10 @@ class _YOUAIState extends State<YOUAI> {
             //onPressed: () {
               //Navigator.pushNamed(context, '/chat'); 
             //},
+          ),
+          GButton(
+            icon: LineIcons.calendar,
+            text: 'Schedule',
           ),
           GButton(
             icon: LineIcons.receipt,
@@ -200,7 +205,7 @@ class ExpandableCard extends StatelessWidget {
       transitionType: ContainerTransitionType.fade,
       transitionDuration: const Duration(milliseconds: 500),
       openBuilder: (BuildContext context, VoidCallback openContainer) {
-        return FullScreenCard(user: user); // Implement the FullScreenCard widget
+        return FullScreenCard(user: user);
       },
       closedBuilder: (BuildContext context, VoidCallback openContainer) {
         return Card(
