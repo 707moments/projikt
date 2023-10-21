@@ -1,12 +1,12 @@
 name: appdevproject
 description: A new Flutter project.
 
-publish_to: 'none' 
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.1.0 <4.0.0'
+  sdk: ">=3.1.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -19,17 +19,23 @@ dependencies:
   flutter_animated_button: ^2.0.3
   animations: ^2.0.8
   flutter_animate: ^4.2.0+1
-  intl: ^0.17.0
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.0
 
 flutter:
+  assets:
+    - assets/images/
+    - assets/images/what.jpg #BANDAID FIX, PLACEHOLDER
+  
+  fonts:
+    - family: Bebas
+      fonts:
+        - asset: assets/fonts/BebasNeue-Regular.ttf
+          weight: 400
 
   uses-material-design: true
-
-  

@@ -18,25 +18,36 @@ class _LoginScreenState extends State<LoginScreen> {
   String? selectedValue = "Pupil";
 
   void handleAvatarTap(int avatarIndex) {
-    print('Avatar $avatarIndex clicked');
+    print('Avatar $avatarIndex clicked'); //testing leading
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Login Account', 
+                'Lorthew',
                 style: TextStyle(
-                  fontSize: 24,
-                  //change font at somepoint
+                    fontFamily: 'Bebas',
+                    fontSize: 40,
+                    fontWeight: FontWeight.w400),
+              ),
+              SizedBox(height: 10),
+              ClipOval(
+                child: SizedBox.fromSize(
+                  size: Size.fromRadius(48),
+                  child: Image.asset(
+                    'assets/images/what.png',
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ).animate().fadeIn(),
-              SizedBox(height: 20), 
+              ),
+              SizedBox(height: 10),
               Card(
                 color: Color.fromRGBO(244, 182, 38, 1),
                 shape: RoundedRectangleBorder(
@@ -148,9 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 size: 16,
                                 color: Colors.yellow,
                               ),
-                              SizedBox(
-                                width: 4,
-                              ),
+                              SizedBox(width: 4),
                               Expanded(
                                 child: Text(
                                   'Select',
@@ -248,7 +257,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           foregroundColor: Color.fromRGBO(16, 48, 89, 1),
                         ),
                         child: Text(
-                            "Don't have an account? Click here to Register"),
+                          "Don't have an account? Click here to Register",
+                          style: TextStyle(fontFamily: 'Bebas'),
+                        ),
                       ),
                     ],
                   ),
