@@ -1,9 +1,12 @@
+import 'package:appdevproject/profile_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/loginscreen.dart';
+import 'package:appdevproject/loginscreen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:animations/animations.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:appdevproject/customnavbar.dart';
+import 'package:appdevproject/schedule_screen.dart';
 
 void main() => runApp(const YOUAI());
 
@@ -29,8 +32,10 @@ class _YOUAIState extends State<YOUAI> {
       theme: themeData,
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginScreen(), //test
-        '/home': (context) => HomeScreen(), // test
+        '/': (context) => LoginScreen(),
+        '/home': (context) => HomeScreen(), 
+        '/schedule': (context) => ScheduleScreen(),
+        '/profile':(context) => ProfileScreen()
       },
     );
   }
@@ -133,49 +138,7 @@ class _YOUAIState extends State<YOUAI> {
           ],
         ),
       ),
-      bottomNavigationBar: GNav(
-        rippleColor: Colors.grey[300]!,
-        hoverColor: Colors.grey[100]!,
-        tabActiveBorder: Border.all(color: Color(0xff4cc55c), width: 1),
-        gap: 8,
-        activeColor: iconColor,
-        iconSize: 24,
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        duration: Duration(milliseconds: 400),
-        tabBackgroundColor: bottomNavBarColor,
-        tabs: [
-          GButton(
-            icon: LineIcons.home,
-            text: 'Home',
-            iconColor: Color.fromRGBO(16, 48, 89, 1),
-          ),
-          GButton(
-            icon: LineIcons.commentAlt,
-            text: 'Chat',
-            //onPressed: () {
-              //Navigator.pushNamed(context, '/chat'); 
-            //},
-          ),
-          GButton(
-            icon: LineIcons.calendar,
-            text: 'Schedule',
-          ),
-          GButton(
-            icon: LineIcons.receipt,
-            text: 'Pay',
-            //onPressed: () {
-              //Navigator.pushNamed(context, '/pay'); 
-            //},
-          ),
-          GButton(
-            icon: LineIcons.user,
-            text: 'Profile',
-            //onPressed: () {
-              //Navigator.pushNamed(context, '/profile'); 
-            //},
-          ),
-        ],
-      ),
+      bottomNavigationBar: CustomNavBar(),
     );
   }
 }
