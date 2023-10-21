@@ -1,6 +1,6 @@
-# flutter_application_1
+# APP Dev Project
 
-A new Flutter project.
+Final Project Requirements for Application Development
 
 ## Getting Started
 
