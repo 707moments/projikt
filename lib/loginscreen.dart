@@ -18,7 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   String? selectedValue = "Pupil";
 
   void handleAvatarTap(int avatarIndex) {
-    print('Avatar $avatarIndex clicked'); //testing leading
+    print('Avatar $avatarIndex clicked'); //testing
   }
 
   @override

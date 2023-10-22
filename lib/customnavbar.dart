@@ -21,6 +21,8 @@ class _CustomNavBarState extends State<CustomNavBar> {
       _selectedIndex = 0;
     } else if (ModalRoute.of(context)?.settings.name == '/schedule') {
       _selectedIndex = 2;
+    } else if (ModalRoute.of(context)?.settings.name == '/payment') {
+      _selectedIndex = 3;
     } else if (ModalRoute.of(context)?.settings.name == '/profile') {
       _selectedIndex = 4;
     }
@@ -56,6 +58,9 @@ class _CustomNavBarState extends State<CustomNavBar> {
         GButton(
           icon: LineIcons.receipt,
           text: 'Pay',
+          onPressed: () {
+            Navigator.pushNamed(context, '/payment');
+          },
         ),
         GButton(
           icon: LineIcons.user,

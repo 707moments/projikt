@@ -1,3 +1,5 @@
+import 'package:animations/animations.dart';
+import 'package:appdevproject/paymentscreen.dart';
 import 'package:appdevproject/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:appdevproject/loginscreen.dart';
@@ -21,10 +23,20 @@ class _YOUAIState extends State<YOUAI> {
   bool isDark = false;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final ThemeData themeData = ThemeData(
       useMaterial3: true,
-      brightness: isDark ? Brightness.dark : Brightness.light,
+      brightness: Brightness.light,
     );
 
     return MaterialApp(
@@ -33,9 +45,10 @@ class _YOUAIState extends State<YOUAI> {
       initialRoute: '/',
       routes: {
         '/': (context) => LoginScreen(),
-        '/home': (context) => HomeScreen(), 
+        '/home': (context) => HomeScreen(),
         '/schedule': (context) => ScheduleScreen(),
-        '/profile':(context) => ProfileScreen()
+        '/profile': (context) => ProfileScreen(),
+        '/payment':(context) => PaymentScreen(),
       },
     );
   }
@@ -48,15 +61,16 @@ class _YOUAIState extends State<YOUAI> {
       UserInfo(
         name: "Ezra Sebastian",
         role: "Math Tutor",
-        description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam",
-        imageUrl: 'https://imageio.forbes.com/specials-images/imageserve/646a275546cda47733a0589b/Lee-Do-hyun/0x0.jpg?format=jpg&crop=1000,905,x0,y123,safe&width=960',
+        description: "Sample description",
+        imageUrl:
+            'https://imageio.forbes.com/specials-images/imageserve/646a275546cda47733a0589b/Lee-Do-hyun/0x0.jpg?format=jpg&crop=1000,905,x0,y123,safe&width=960',
       ),
       UserInfo(
-        name: "Mr. Ming", 
-        role: "Meowing 101", 
-        description: "Professional Meowth master since birth", 
-        imageUrl: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSGfpQ3m-QWiXgCBJJbrcUFdNdWAhj7rcUqjeNUC6eKcXZDAtWm"
-      )
+          name: "Mr. Ming",
+          role: "Meowing 101",
+          description: "Sample description",
+          imageUrl:
+              "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSGfpQ3m-QWiXgCBJJbrcUFdNdWAhj7rcUqjeNUC6eKcXZDAtWm")
     ];
 
     return Scaffold(
@@ -81,10 +95,13 @@ class _YOUAIState extends State<YOUAI> {
                 children: [
                   Expanded(
                     child: SearchAnchor(
-                      builder: (BuildContext context, SearchController controller) {
+                      builder:
+                          (BuildContext context, SearchController controller) {
                         return SearchBar(
                           controller: controller,
-                          padding: const MaterialStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(horizontal: 16.0)),
+                          padding: const MaterialStatePropertyAll<EdgeInsets>(
+                            EdgeInsets.symmetric(horizontal: 16.0),
+                          ),
                           onTap: () {
                             controller.openView();
                           },
@@ -92,24 +109,10 @@ class _YOUAIState extends State<YOUAI> {
                             controller.openView();
                           },
                           leading: const Icon(Icons.search),
-                          trailing: <Widget>[
-                            Tooltip(
-                              message: 'Change brightness mode',
-                              child: IconButton(
-                                isSelected: isDark,
-                                onPressed: () {
-                                  setState(() {
-                                    isDark = !isDark;
-                                  });
-                                },
-                                icon: const Icon(Icons.wb_sunny_outlined),
-                                selectedIcon: const Icon(Icons.brightness_2_outlined),
-                              ),
-                            )
-                          ],
                         );
                       },
-                      suggestionsBuilder: (BuildContext context, SearchController controller) {
+                      suggestionsBuilder:
+                          (BuildContext context, SearchController controller) {
                         return List<ListTile>.generate(5, (int index) {
                           final String item = 'item $index';
                           return ListTile(
@@ -299,13 +302,13 @@ class FullScreenCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "Di ko alam ilalagay:",
+                      "Sample Text:",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
-                      "Baka buttons for other shit",
+                      "Sample description",
                     ),
                   ],
                 ),
