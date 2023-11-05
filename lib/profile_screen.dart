@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:appdevproject/customnavbar.dart';
 
+// problem: you can see shit below the navbar. IMPORTANT
 void main() {
   runApp(
     MaterialApp(
@@ -194,7 +195,6 @@ class ProfileStudent extends StatelessWidget {
                           //fontWeight: FontWeight.bold,
                         ),
                       )
-
                     ],
                   ),
                 ),
@@ -208,4 +208,3 @@ class ProfileStudent extends StatelessWidget {
     );
   }
 }
-

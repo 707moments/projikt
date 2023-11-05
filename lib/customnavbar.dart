@@ -6,6 +6,9 @@ import 'package:line_icons/line_icons.dart';
 import 'package:appdevproject/main.dart';
 import 'package:appdevproject/profile_screen.dart';
 
+
+// problem: overflow, right side, when home
+
 class CustomNavBar extends StatefulWidget {
   @override
   _CustomNavBarState createState() => _CustomNavBarState();
