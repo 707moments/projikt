@@ -1,5 +1,6 @@
 import 'package:appdevproject/customnavbar.dart';
 import 'package:flutter/material.dart';
+import 'package:appdevproject/payment2.dart';
 
 /*
 TODO:
@@ -92,7 +93,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => NewPage(items[index]),
+                        builder: (context) => PaymentScreen2(items[index]),
                       ),
                     );
                   },
@@ -126,24 +127,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
         ],
       ),
       bottomNavigationBar: CustomNavBar(),
-    );
-  }
-}
-
-class NewPage extends StatelessWidget {
-  final String item;
-
-  NewPage(this.item);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('$item'),
-      ),
-      body: Center(
-        child: Text('Payment Screen something ni $item.'),
-      ),
     );
   }
 }
