@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
+import 'package:appdevproject/payment3.dart';
 import 'package:appdevproject/paymentscreen.dart';
 import 'package:appdevproject/profile_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:appdevproject/loginscreen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
@@ -13,7 +14,7 @@ import 'package:appdevproject/schedule_screen.dart';
 void main() => runApp(const YOUAI());
 
 class YOUAI extends StatefulWidget {
-  const YOUAI({super.key});
+  const YOUAI({Key? key}) : super(key: key);
 
   @override
   State<YOUAI> createState() => _YOUAIState();
@@ -48,7 +49,8 @@ class _YOUAIState extends State<YOUAI> {
         '/home': (context) => HomeScreen(),
         '/schedule': (context) => ScheduleScreen(),
         '/profile': (context) => ProfileScreen(),
-        '/payment':(context) => PaymentScreen(),
+        '/payment': (context) => PaymentScreen(),
+        '/p3': (context) => Payment3(),
       },
     );
   }
@@ -66,11 +68,12 @@ class _YOUAIState extends State<YOUAI> {
             'https://imageio.forbes.com/specials-images/imageserve/646a275546cda47733a0589b/Lee-Do-hyun/0x0.jpg?format=jpg&crop=1000,905,x0,y123,safe&width=960',
       ),
       UserInfo(
-          name: "Mr. Ming",
-          role: "Meowing 101",
-          description: "Sample description",
-          imageUrl:
-              "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSGfpQ3m-QWiXgCBJJbrcUFdNdWAhj7rcUqjeNUC6eKcXZDAtWm")
+        name: "Mr. Ming",
+        role: "Meowing 101",
+        description: "Sample description",
+        imageUrl:
+            "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSGfpQ3m-QWiXgCBJJbrcUFdNdWAhj7rcUqjeNUC6eKcXZDAtWm",
+      )
     ];
 
     return Scaffold(
@@ -95,8 +98,7 @@ class _YOUAIState extends State<YOUAI> {
                 children: [
                   Expanded(
                     child: SearchAnchor(
-                      builder:
-                          (BuildContext context, SearchController controller) {
+                      builder: (BuildContext context, SearchController controller) {
                         return SearchBar(
                           controller: controller,
                           padding: const MaterialStatePropertyAll<EdgeInsets>(
@@ -111,8 +113,7 @@ class _YOUAIState extends State<YOUAI> {
                           leading: const Icon(Icons.search),
                         );
                       },
-                      suggestionsBuilder:
-                          (BuildContext context, SearchController controller) {
+                      suggestionsBuilder: (BuildContext context, SearchController controller) {
                         return List<ListTile>.generate(5, (int index) {
                           final String item = 'item $index';
                           return ListTile(
@@ -175,8 +176,9 @@ class ExpandableCard extends StatelessWidget {
       },
       closedBuilder: (BuildContext context, VoidCallback openContainer) {
         return Card(
+          elevation: 5,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(10),
           ),
           clipBehavior: Clip.antiAliasWithSaveLayer,
           child: Column(
@@ -192,6 +194,15 @@ class ExpandableCard extends StatelessWidget {
                       height: 100,
                       width: 100,
                       fit: BoxFit.cover,
+                      loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        } else {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      },
                     ),
                     Container(width: 20),
                     Expanded(
@@ -203,7 +214,9 @@ class ExpandableCard extends StatelessWidget {
                             user.name,
                             style: TextStyle(
                               fontStyle: FontStyle.italic,
-                              color: Colors.grey[80],
+                              color: Colors.grey[800],
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
                             ),
                           ),
                           Container(height: 5),
@@ -212,6 +225,7 @@ class ExpandableCard extends StatelessWidget {
                             style: TextStyle(
                               fontStyle: FontStyle.italic,
                               color: Colors.grey[500],
+                              fontSize: 14,
                             ),
                           ),
                           Text(
@@ -219,6 +233,7 @@ class ExpandableCard extends StatelessWidget {
                             maxLines: 2,
                             style: TextStyle(
                               color: Colors.grey[500],
+                              fontSize: 14,
                             ),
                           ),
                         ],
@@ -259,6 +274,15 @@ class FullScreenCard extends StatelessWidget {
                   height: 100,
                   width: 100,
                   fit: BoxFit.cover,
+                  loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) {
+                      return child;
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
                 ),
                 Container(width: 20),
                 Expanded(
@@ -270,7 +294,9 @@ class FullScreenCard extends StatelessWidget {
                         user.name,
                         style: TextStyle(
                           fontStyle: FontStyle.italic,
-                          color: Colors.grey[80],
+                          color: Colors.grey[800],
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
                         ),
                       ),
                       Container(height: 5),
@@ -279,6 +305,7 @@ class FullScreenCard extends StatelessWidget {
                         style: TextStyle(
                           fontStyle: FontStyle.italic,
                           color: Colors.grey[500],
+                          fontSize: 14,
                         ),
                       ),
                       Text(
@@ -286,6 +313,7 @@ class FullScreenCard extends StatelessWidget {
                         maxLines: 2,
                         style: TextStyle(
                           color: Colors.grey[500],
+                          fontSize: 14,
                         ),
                       ),
                     ],
@@ -305,10 +333,12 @@ class FullScreenCard extends StatelessWidget {
                       "Sample Text:",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
+                        fontSize: 18,
                       ),
                     ),
                     Text(
                       "Sample description",
+                      style: TextStyle(fontSize: 16),
                     ),
                   ],
                 ),
@@ -324,6 +354,7 @@ class FullScreenCard extends StatelessWidget {
                     "Call",
                     style: TextStyle(
                       color: Colors.green,
+                      fontSize: 16,
                     ),
                   ),
                   onPressed: () {},
@@ -333,6 +364,7 @@ class FullScreenCard extends StatelessWidget {
                     "Message",
                     style: TextStyle(
                       color: Colors.blue,
+                      fontSize: 16,
                     ),
                   ),
                   onPressed: () {},
