@@ -44,7 +44,7 @@ class ProfileStudent extends StatelessWidget {
             ),
             const Center(
               child: Text(
-                'Profile',
+                'Edit Profile',
                 style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
@@ -64,9 +64,23 @@ class ProfileStudent extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const CircleAvatar(
-              radius: 50.0,
-              backgroundImage: NetworkImage('ProfileImageURL'),
+            Container(
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(44, 132, 157, 188),
+                shape: BoxShape.circle,
+                image: DecorationImage(image:NetworkImage('Usericon')),
+              ),
+              child: IconButton(
+                iconSize: 100,
+                splashRadius: 1,
+                icon: const Icon(Icons.add),
+                splashColor: const Color.fromARGB(102, 255, 0, 0),
+                tooltip: "Add/Change your icon.",
+                color: Colors.black,
+                onPressed: () {
+                  //
+                },
+              ),
             ),
             const SizedBox(height: 10.0),
             const Text(
@@ -130,15 +144,19 @@ class ProfileStudent extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 10.0,),
+            const SizedBox(
+              height: 10.0,
+            ),
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Text(
-                'I am a passionate software developer with a keen interest in mobile application development.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16.0,
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText:
+                      'I am a passionate software developer with a keen interest in mobile application development.',
                 ),
+                maxLines: 3,
+                minLines: 2,
               ),
             ),
             const SizedBox(height: 15.0),
@@ -149,18 +167,42 @@ class ProfileStudent extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 10.0),
-            const ListTile(
-              leading: Icon(Icons.email),
-              title: Text('Email: john.doe@example.com'),
-            ),
-            const ListTile(
-              leading: Icon(Icons.phone),
-              title: Text('Phone: +1234567890'),
-            ),
-            const ListTile(
-              leading: Icon(Icons.location_on),
-              title: Text('Location: City, Country'),
+            const Column(
+              children: <Widget>[
+                SizedBox(height: 10.0),
+                ListTile(
+                  leading: Icon(Icons.email),
+                  title: Text('Email:'),
+                  subtitle: TextField(
+                    decoration: InputDecoration(
+                      border: UnderlineInputBorder(),
+                      hintText: 'john.doe@example.com',
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10.0),
+                ListTile(
+                  leading: Icon(Icons.email),
+                  title: Text('Phone:'),
+                  subtitle: TextField(
+                    decoration: InputDecoration(
+                      border: UnderlineInputBorder(),
+                      hintText: '+1234567890',
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10.0),
+                ListTile(
+                  leading: Icon(Icons.email),
+                  title: Text('Location:'),
+                  subtitle: TextField(
+                    decoration: InputDecoration(
+                      border: UnderlineInputBorder(),
+                      hintText: 'City, Country',
+                    ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 10.0),
             SizedBox(
@@ -171,7 +213,8 @@ class ProfileStudent extends StatelessWidget {
                   //
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFFFDD835)),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(const Color(0xFFFDD835)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
@@ -182,17 +225,16 @@ class ProfileStudent extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(LineIcons.calendarAlt, color: Colors.black),
+                      Icon(LineIcons.doubleCheck, color: Colors.black),
                       SizedBox(width: 10),
                       Text(
-                        'Schedule a Lesson',
+                        'Done',
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 15,
                           //fontWeight: FontWeight.bold,
                         ),
                       )
-
                     ],
                   ),
                 ),
@@ -205,4 +247,3 @@ class ProfileStudent extends StatelessWidget {
     );
   }
 }
-

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:appdevproject/customnavbar.dart';
 
 class ScheduleScreen extends StatelessWidget {
   final List<StudentInfo> tutorData = [
@@ -277,17 +276,17 @@ class ScheduleTutor extends StatelessWidget {
                               ),
                             ),
                           ],
-                        ),                     
+                        ),
                       ),
-                    ),             
+                    ),
+
                   ],
                 ),
-              ],             
-            ),          
-          ),          
+              ],
+            ),
+          ),
         ),
       ),
-      bottomNavigationBar: CustomNavBar(),
     );
   }
 }
