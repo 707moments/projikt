@@ -36,7 +36,7 @@ class StudentInfo {
 void main() {
   runApp(
     MaterialApp(
-      title: 'Profile Page',
+      title: 'Tutor Schedule',
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
         primarySwatch: Colors.blue,

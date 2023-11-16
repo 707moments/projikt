@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:appdevproject/main.dart';
-import 'package:appdevproject/profile_screen.dart';
+import 'package:appdevproject/view_screen_tutor.dart';
+import 'package:appdevproject/chat_contacts.dart';
 
 
 // problem: overflow, right side, when home
@@ -22,6 +23,8 @@ class _CustomNavBarState extends State<CustomNavBar> {
   Widget build(BuildContext context) {
     if (ModalRoute.of(context)?.settings.name == '/home') {
       _selectedIndex = 0;
+    } else if (ModalRoute.of(context)?.settings.name == '/chat') {
+      _selectedIndex = 1;
     } else if (ModalRoute.of(context)?.settings.name == '/schedule') {
       _selectedIndex = 2;
     } else if (ModalRoute.of(context)?.settings.name == '/payment') {
@@ -50,6 +53,9 @@ class _CustomNavBarState extends State<CustomNavBar> {
         GButton(
           icon: LineIcons.commentAlt,
           text: 'Chat',
+          onPressed: () {
+            Navigator.pushNamed(context, '/chat');
+          },
         ),
         GButton(
           icon: LineIcons.calendar,

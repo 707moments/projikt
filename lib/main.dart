@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
 import 'package:appdevproject/payment3.dart';
 import 'package:appdevproject/paymentscreen.dart';
-import 'package:appdevproject/profile_screen.dart';
+import 'package:appdevproject/view_screen_tutor.dart';
 import 'package:appdevproject/loginscreen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
@@ -10,6 +10,10 @@ import 'package:animations/animations.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:appdevproject/customnavbar.dart';
 import 'package:appdevproject/schedule_screen.dart';
+import 'package:appdevproject/chat_contacts.dart';
+import 'package:appdevproject/chat_screen.dart';
+import 'package:appdevproject/profile_student.dart';
+import 'package:appdevproject/profile_edit_student.dart';
 
 void main() => runApp(const YOUAI());
 
@@ -47,8 +51,10 @@ class _YOUAIState extends State<YOUAI> {
       routes: {
         '/': (context) => LoginScreen(),
         '/home': (context) => HomeScreen(),
+        '/chat': (context) => ChatContacts(),
+        '/chatScreen': (context) => ChatScreen(userName: '',),
         '/schedule': (context) => ScheduleScreen(),
-        '/profile': (context) => ProfileScreen(),
+        '/profile': (context) => ProfileStudent(),
         '/payment': (context) => PaymentScreen(),
         '/p3': (context) => Payment3(),
       },

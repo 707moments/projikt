@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(ChatApp());
-}
-
 class ChatApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Chat',
+      title: 'Chat Function',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ChatScreen(),
+      //home: ChatScreen(userName: '', tutorName: '',),
+      home: ChatScreen(userName: '',),
     );
   }
 }
 
 class ChatScreen extends StatefulWidget {
+  final String userName;
+  //final String tutorName;
+
+  //ChatScreen({required this.userName, required this.tutorName});
+  ChatScreen({required this.userName});
+
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -49,7 +52,7 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
           IconButton(
             icon: Icon(Icons.send),
-            color: Colors.yellow, // Set send icon color to yellow
+            color: Colors.yellow,
             onPressed: () {
               if (_textController.text.isNotEmpty) {
                 _handleSubmitted(_textController.text);
@@ -65,10 +68,10 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white, // Set app bar background color to white
+        backgroundColor: Colors.white,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          color: Colors.black, // Set back icon color to black
+          color: Colors.black,
           onPressed: () {
             Navigator.pop(context);
           },
@@ -76,7 +79,7 @@ class _ChatScreenState extends State<ChatScreen> {
         actions: [
           IconButton(
             icon: Icon(Icons.phone),
-            color: Colors.black, // Set phone icon color to black
+            color: Colors.black,
             onPressed: () {
               // Add functionality for phone icon
             },
@@ -85,26 +88,24 @@ class _ChatScreenState extends State<ChatScreen> {
         title: Row(
           children: [
             CircleAvatar(
-              // Use CircleAvatar as the title
-              backgroundColor:
-                  Colors.blue, // Set the background color of the CircleAvatar
+              backgroundColor: Colors.blue,
               child: Text(
-                'U', // You can put your initials or any desired text here
+                'U',
                 style: TextStyle(color: Colors.white),
               ),
             ),
             SizedBox(
               width: 8,
-            ), // Add some space between the avatar and the name
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Tutor Name', // Replace 'Tutor Name' with the actual tutor's name
+                  widget.userName, // Use widget.tutorName here
                   style: TextStyle(color: Colors.black),
                 ),
                 Text(
-                  'Physics Tutor', // Add another text for the tutor's specialization
+                  'Specialization: Physics', // You can customize this line based on your needs
                   style: TextStyle(color: Colors.grey, fontSize: 12),
                 ),
               ],
@@ -112,7 +113,7 @@ class _ChatScreenState extends State<ChatScreen> {
           ],
         ),
         centerTitle: true,
-        elevation: 0, // Remove shadow from the app bar
+        elevation: 0,
       ),
       body: Column(
         children: [
