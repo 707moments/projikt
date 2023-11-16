@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:appdevproject/customnavbar.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
 
 class ScheduleScreen extends StatelessWidget {
   final List<StudentInfo> tutorData = [
@@ -7,7 +11,7 @@ class ScheduleScreen extends StatelessWidget {
     StudentInfo(name: "Jonathan Jarvis", date: "10:30 am - 12:30 am"),
     StudentInfo(name: "Natalia Lamb", date: "2:00 pm - 4:30 pm"),
     StudentInfo(name: "Dillan O'Quinn", date: "4:30 pm - 6:30 pm"),
-    //StudentInfo(name: "Rachel Larson", date: "6:30 pm - 7:30 pm"),
+    StudentInfo(name: "Rachel Larson", date: "6:30 pm - 7:30 pm"),
     //StudentInfo(name: "Victoria Downs", date: "7:30 pm - 8:30 pm"),
     //StudentInfo(name: "Inaaya Cain", date: "9:30 pm - 10:30 pm"),
   ];
@@ -61,6 +65,71 @@ class ScheduleTutor extends StatelessWidget {
     DateTime now = DateTime.now();
     String month = DateFormat('MMM').format(now);
     String day = DateFormat('d').format(now);
+
+    int remainingStudents = tutorDatas.length - 4 + 1;
+    bool showRemainingStudents = remainingStudents > 1;
+
+    pw.Widget _buildPdfContent() {
+      DateTime now = DateTime.now();
+      String formattedDate = DateFormat('MMMM dd, yyyy').format(now);
+
+      return pw.Column(
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
+        children: [
+          pw.Text(
+            'Student Schedule',
+            style: pw.TextStyle(
+              fontSize: 20,
+              fontWeight: pw.FontWeight.bold,
+            ),
+          ),
+          pw.SizedBox(height: 10),
+          pw.Text(
+            'Date: $formattedDate',
+            style: pw.TextStyle(
+              fontSize: 16,
+              fontWeight: pw.FontWeight.bold,
+            ),
+          ),
+          pw.SizedBox(height: 10),
+          for (var info in tutorDatas)
+            pw.Row(
+              children: [
+                pw.Text(
+                  'Name: ${info.name}',
+                  style: pw.TextStyle(
+                    fontSize: 16,
+                    fontWeight: pw.FontWeight.bold,
+                  ),
+                ),
+                pw.SizedBox(width: 10),
+                pw.Text(
+                  'Schedule: ${info.date}',
+                  style: pw.TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+        ],
+      );
+    }
+
+    Future<void> _printPdf() async {
+      final pdf = pw.Document();
+
+      // Add your widget to PDF
+      pdf.addPage(pw.MultiPage(
+        build: (context) => [
+          _buildPdfContent(),
+        ],
+      ));
+
+      // Print the PDF
+      await Printing.layoutPdf(
+        onLayout: (format) async => pdf.save(),
+      );
+    }
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -165,8 +234,8 @@ class ScheduleTutor extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                if (tutorDatas.length > 4)
-                                  const Column(
+                                if (showRemainingStudents)
+                                  Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Row(
@@ -177,7 +246,7 @@ class ScheduleTutor extends StatelessWidget {
                                           ),
                                           SizedBox(width: 5.0),
                                           Text(
-                                            '...',
+                                            '+ $remainingStudents more students',
                                             style: TextStyle(
                                               fontSize: 14,
                                               color: Colors.black,
@@ -250,9 +319,7 @@ class ScheduleTutor extends StatelessWidget {
                       }).toList(),
                     ),
                     TextButton(
-                      onPressed: () {
-                        //
-                      },
+                      onPressed: _printPdf,
                       style: ButtonStyle(
                         overlayColor: MaterialStateProperty.resolveWith((states) {
                           return Colors.transparent;
@@ -287,6 +354,7 @@ class ScheduleTutor extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: CustomNavBar(),
     );
   }
 }

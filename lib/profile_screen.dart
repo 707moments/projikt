@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:appdevproject/customnavbar.dart';
 
 void main() {
   runApp(
@@ -31,13 +32,6 @@ class ProfileStudent extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            IconButton(
-              icon: const Icon(Icons.arrow_back),
-              color: Colors.black,
-              onPressed: () {
-                //
-              },
-            ),
             const SizedBox(
               width: 48.0,
               height: 48.0,
@@ -202,6 +196,7 @@ class ProfileStudent extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: CustomNavBar(),
     );
   }
 }

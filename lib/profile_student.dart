@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:appdevproject/customnavbar.dart';
 
 void main() => runApp(MyApp());
 
@@ -99,6 +100,7 @@ class ProfilePage extends StatelessWidget {
           ],
         ),
       ),
+
     );
   }
 }
