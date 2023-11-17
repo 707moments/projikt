@@ -1,44 +1,36 @@
+import 'package:appdevproject/profile_student.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:appdevproject/profile_student.dart';
-
-void main() {
-  var initialProfileData;
-  runApp(
-    MaterialApp(
-      title: 'Profile Page',
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: EditStudent(profileData: initialProfileData),
-    ),
-  );
-}
+import 'package:psgc_picker/psgc_picker.dart';
 
 class EditStudent extends StatelessWidget {
   final ProfileData profileData;
+  final Function(ProfileData) onUpdate;
 
-  EditStudent({required this.profileData});
+  EditStudent({required this.profileData, required this.onUpdate});
 
   @override
   Widget build(BuildContext context) {
-    return StudentEdit(profileData: profileData, onProfileUpdated: (ProfileData updatedProfileData) {  },);
+    return StudentEdit(
+      profileData: profileData,
+      onUpdate: onUpdate,
+    );
   }
 }
 
 class StudentEdit extends StatefulWidget {
   final ProfileData profileData;
-  final Function(ProfileData updatedProfileData) onProfileUpdated;
+  final Function(ProfileData) onUpdate;
 
-  StudentEdit({required this.profileData, required this.onProfileUpdated});
+  StudentEdit({required this.profileData, required this.onUpdate});
 
   @override
-  _ProfileStudentState createState() => _ProfileStudentState();
+  _StudentEditState createState() => _StudentEditState();
 }
 
-class _ProfileStudentState extends State<StudentEdit> {
-  late TextEditingController _nameController;
+class _StudentEditState extends State<StudentEdit> {
+  late TextEditingController _firstNameController;
+  late TextEditingController _lastNameController;
   late TextEditingController _aboutMeController;
   late TextEditingController _emailController;
   late TextEditingController _phoneController;
@@ -48,8 +40,8 @@ class _ProfileStudentState extends State<StudentEdit> {
   void initState() {
     super.initState();
 
-    // Initialize controllers with values from profileData
-    _nameController = TextEditingController(text: widget.profileData.name);
+    _firstNameController = TextEditingController(text: widget.profileData.firstName);
+    _lastNameController = TextEditingController(text: widget.profileData.lastName);
     _aboutMeController = TextEditingController(text: widget.profileData.aboutMe);
     _emailController = TextEditingController(text: widget.profileData.email);
     _phoneController = TextEditingController(text: widget.profileData.phone);
@@ -87,7 +79,7 @@ class _ProfileStudentState extends State<StudentEdit> {
                 color: Colors.black,
               ),
             ),
-            SizedBox(width: 70.0),
+            SizedBox(width: 75.0),
           ],
         ),
         toolbarHeight: 80.0,
@@ -97,6 +89,7 @@ class _ProfileStudentState extends State<StudentEdit> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              SizedBox(height: 25.0),
               Container(
                 decoration: BoxDecoration(
                   color: Color.fromARGB(44, 132, 157, 188),
@@ -116,31 +109,31 @@ class _ProfileStudentState extends State<StudentEdit> {
                 ),
               ),
               SizedBox(height: 10.0),
-              buildEditableField("Name", _nameController, textAlign: TextAlign.right),
-              SizedBox(height: 15.0),
-              buildEditableField("About Me", _aboutMeController, maxLines: 3, textAlign: TextAlign.right),
-              SizedBox(height: 15.0),
-              buildEditableField("Email", _emailController, textAlign: TextAlign.right),
-              buildEditableField("Phone", _phoneController, textAlign: TextAlign.right),
-              buildEditableField("Location", _locationController, textAlign: TextAlign.right),
-              SizedBox(height: 20.0),
+              buildEditableField("First Name", _firstNameController, maxLength: 50, textAlign: TextAlign.left),
+              buildEditableField("Last Name", _lastNameController, maxLength: 50, textAlign: TextAlign.left),
+              buildEditableField("About Me", _aboutMeController, maxLines: 6, textAlign: TextAlign.left),
+              buildEditableField("Email", _emailController, maxLength: 50, textAlign: TextAlign.left),
+              buildEditableField("Phone", _phoneController, textAlign: TextAlign.left),
+              buildEditableField("Location", _locationController, textAlign: TextAlign.left),
+              SizedBox(height: 50.0),
               SizedBox(
                 height: 50,
                 width: 300,
                 child: ElevatedButton(
                   onPressed: () {
-                    ProfileData updatedProfileData = ProfileData(
-                      name: _nameController.text,
+                    var updatedProfileData = ProfileData(
+                      firstName: _firstNameController.text,
+                      lastName: _lastNameController.text,
                       aboutMe: _aboutMeController.text,
                       email: _emailController.text,
                       phone: _phoneController.text,
                       location: _locationController.text,
                     );
 
-                    // Call the callback function to update the profile
-                    widget.onProfileUpdated(updatedProfileData);
+                    // Call the onUpdate callback to pass back the updated profile data
+                    widget.onUpdate(updatedProfileData);
 
-                    // Close the edit page
+                    // Navigate back with the updated profile data
                     Navigator.of(context).pop(updatedProfileData);
                   },
 
@@ -179,7 +172,7 @@ class _ProfileStudentState extends State<StudentEdit> {
   }
 
   Widget buildEditableField(String label, TextEditingController controller,
-      {int maxLines = 1, TextAlign textAlign = TextAlign.left}) {
+      {int maxLines = 1, TextAlign textAlign = TextAlign.left, int maxLength = 160}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
@@ -194,22 +187,23 @@ class _ProfileStudentState extends State<StudentEdit> {
             ),
           ),
           SizedBox(width: 10),
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(12),
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: TextFormField(
-                controller: controller,
-                maxLines: maxLines,
-                textAlign: textAlign,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Enter your $label',
-                  fillColor: Colors.grey[200],
-                ),
+          Container(
+            width: 280, // Set the desired width here
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(12),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: TextFormField(
+              controller: controller,
+              maxLines: maxLines,
+              textAlign: textAlign,
+              maxLength: maxLength,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: 'Enter your $label',
+                fillColor: Colors.grey[200],
+                hintStyle: TextStyle(fontSize: 14.0),
               ),
             ),
           ),

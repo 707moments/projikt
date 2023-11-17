@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:appdevproject/customnavbar.dart';
 import 'package:appdevproject/profile_edit_student.dart';
+import 'package:psgc_picker/psgc_picker.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,14 +20,16 @@ class MyApp extends StatelessWidget {
 }
 
 class ProfileData {
-  final String name;
+  final String firstName;
+  final String lastName;
   final String aboutMe;
   final String email;
   final String phone;
   final String location;
 
   ProfileData({
-    required this.name,
+    required this.firstName,
+    required this.lastName,
     required this.aboutMe,
     required this.email,
     required this.phone,
@@ -34,31 +37,46 @@ class ProfileData {
   });
 }
 
-class ProfileStudent extends StatelessWidget {
-  late final ProfileData profileData;
 
-  ProfileStudent({ProfileData? initialProfileData})
-      : profileData = initialProfileData ??
-      ProfileData(
-        name: 'John Doe',
-        aboutMe:
-        'I am a passionate software developer with a keen interest in mobile application development.',
-        email: 'john.doe@example.com',
-        phone: '+1234567890',
-        location: 'City, Country',
-      );
+class ProfileStudent extends StatefulWidget {
+  @override
+  _ProfileStudentState createState() => _ProfileStudentState();
+}
 
-  void updateProfileData(ProfileData updatedProfileData) {
-    // Create a new ProfileData with the updated values
-    ProfileData newProfileData = ProfileData(
-      name: updatedProfileData.name,
-      aboutMe: updatedProfileData.aboutMe,
-      email: updatedProfileData.email,
-      phone: updatedProfileData.phone,
-      location: updatedProfileData.location,
+class _ProfileStudentState extends State<ProfileStudent> {
+  late ProfileData profileData;
+
+  @override
+  void initState() {
+    super.initState();
+    profileData = ProfileData(
+      firstName: 'John',
+      lastName: 'Doe',
+      aboutMe:
+      'I am a passionate software developer with a keen interest in mobile application development.',
+      email: 'john.doe@example.com',
+      phone: '+1234567890',
+      location: 'City, Country',
     );
-    profileData = newProfileData;
   }
+
+  void _navigateToEditStudent() async {
+    var updatedProfileData = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EditStudent(
+          profileData: profileData, onUpdate: (ProfileData ) {  },
+        ),
+      ),
+    );
+
+    if (updatedProfileData != null) {
+      setState(() {
+        profileData = updatedProfileData;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +87,7 @@ class ProfileStudent extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(width: 30.0),
+            SizedBox(width: 25.0),
             Text(
               'Profile',
               style: TextStyle(
@@ -79,21 +97,7 @@ class ProfileStudent extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () async {
-                // Navigate to the edit page and receive changes
-                ProfileData updatedProfileData = await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => EditStudent(profileData: profileData),
-                  ),
-                );
-
-                // Check if changes were made and update the profile
-                if (updatedProfileData != null) {
-                  // Assuming you have a function to update the profile data in ProfileStudent
-                  updateProfileData(updatedProfileData);
-                }
-              },
+              onTap: _navigateToEditStudent,
               child: Icon(
                 Icons.settings,
                 color: Colors.black,
@@ -114,7 +118,7 @@ class ProfileStudent extends StatelessWidget {
             ),
             SizedBox(height: 20.0),
             Text(
-              profileData.name,
+              profileData.firstName+' '+profileData.lastName,
               style: TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,

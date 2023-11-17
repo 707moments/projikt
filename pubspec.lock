@@ -142,6 +142,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
+  flutter_form_builder:
+    dependency: "direct main"
+    description:
+      name: flutter_form_builder
+      sha256: "8973beed34b6d951d36bf688b52e9e3040b47b763c35c320bd6f4c2f6b13f3a2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "9.1.1"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -304,6 +312,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.11.1"
+  psgc_picker:
+    dependency: "direct main"
+    description:
+      name: psgc_picker
+      sha256: "843e02f942d15995735ebca5a5d25bfe73f2fb3121c8cf85e61fb5a4894ab067"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   qr:
     dependency: transitive
     description:
