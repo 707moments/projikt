@@ -14,8 +14,16 @@ import 'package:appdevproject/chat_contacts.dart';
 import 'package:appdevproject/chat_screen.dart';
 import 'package:appdevproject/profile_student.dart';
 import 'package:appdevproject/profile_edit_student.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() => runApp(const YOUAI());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const YOUAI());
+}
 
 class YOUAI extends StatefulWidget {
   const YOUAI({Key? key}) : super(key: key);
