@@ -104,7 +104,7 @@ class _StudentEditState extends State<StudentEdit> {
                   tooltip: "Add/Change your icon.",
                   color: Colors.black,
                   onPressed: () {
-                    // Your icon change logic here
+
                   },
                 ),
               ),
@@ -130,10 +130,8 @@ class _StudentEditState extends State<StudentEdit> {
                       location: _locationController.text,
                     );
 
-                    // Call the onUpdate callback to pass back the updated profile data
                     widget.onUpdate(updatedProfileData);
 
-                    // Navigate back with the updated profile data
                     Navigator.of(context).pop(updatedProfileData);
                   },
 
@@ -152,7 +150,7 @@ class _StudentEditState extends State<StudentEdit> {
                         Icon(LineIcons.doubleCheck, color: Colors.white),
                         SizedBox(width: 10),
                         Text(
-                          'Done',
+                          'Save',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15,
@@ -188,7 +186,7 @@ class _StudentEditState extends State<StudentEdit> {
           ),
           SizedBox(width: 10),
           Container(
-            width: 280, // Set the desired width here
+            width: 280,
             decoration: BoxDecoration(
               color: Colors.grey[200],
               borderRadius: BorderRadius.circular(12),
