@@ -23,10 +23,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Center(
+          child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -49,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 10),
               Card(
-                color: Color.fromRGBO(244, 182, 38, 1),
+                color: (const Color(0xFFFDD835)),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0),
                 ),
@@ -59,58 +64,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       SizedBox(height: 30),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          InkWell(
-                            onTap: () {
-                              handleAvatarTap(0);
-                            },
-                            child: CircleAvatar(
-                              backgroundColor: Color.fromRGBO(16, 48, 89, 1),
-                              radius: 30,
-                              child: ClipOval(
-                                child:
-                                    Image.asset('assets/images/myidolo2.jpg'),
-                              ),
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              handleAvatarTap(1);
-                            },
-                            child: CircleAvatar(
-                              backgroundColor: Color.fromRGBO(16, 48, 89, 1),
-                              radius: 30,
-                              child: ClipOval(
-                                child:
-                                    Image.asset('assets/images/myidolo2.jpg'),
-                              ),
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              handleAvatarTap(2);
-                            },
-                            child: CircleAvatar(
-                              backgroundColor: Color.fromRGBO(16, 48, 89, 1),
-                              radius: 30,
-                              child: ClipOval(
-                                child:
-                                    Image.asset('assets/images/myidolo2.jpg'),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        'OR',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 20),
                       Text(
                         'Login with your email and password:',
                         style: TextStyle(
@@ -127,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           decoration: InputDecoration(
                             labelText: 'Email',
                             contentPadding:
-                                EdgeInsets.symmetric(horizontal: 20),
+                            EdgeInsets.symmetric(horizontal: 20),
                             border: InputBorder.none,
                           ),
                         ),
@@ -142,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           decoration: InputDecoration(
                             labelText: 'Password',
                             contentPadding:
-                                EdgeInsets.symmetric(horizontal: 20),
+                            EdgeInsets.symmetric(horizontal: 20),
                             border: InputBorder.none,
                           ),
                           obscureText: true,
@@ -175,17 +128,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           items: items
                               .map((String item) => DropdownMenuItem<String>(
-                                    value: item,
-                                    child: Text(
-                                      item,
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ))
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ))
                               .toList(),
                           value: selectedValue,
                           onChanged: (String? value) {
@@ -216,7 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           dropdownStyleData: DropdownStyleData(
                             maxHeight: 200,
-                            width: 400,
+                            width: 350, //400 width dati
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(14),
                               color: const Color.fromRGBO(16, 48, 89, 1),
@@ -225,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               radius: const Radius.circular(40),
                               thickness: MaterialStateProperty.all<double>(6),
                               thumbVisibility:
-                                  MaterialStateProperty.all<bool>(true),
+                              MaterialStateProperty.all<bool>(true),
                             ),
                           ),
                           menuItemStyleData: const MenuItemStyleData(
@@ -268,6 +221,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
         ).animate().fadeIn().scale().move(delay: 500.ms, duration: 600.ms),
+        ),
       ),
     );
   }
